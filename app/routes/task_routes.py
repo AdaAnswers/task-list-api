@@ -83,7 +83,7 @@ def mark_task_complete(task_id):
     db.session.add(task)
     db.session.commit()
 
-    #post_to_slack(task)
+    # post_to_slack(task)
 
     return {"task": task.to_dict()}
 
