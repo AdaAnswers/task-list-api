@@ -71,19 +71,18 @@ def get_tasks_from_goal(goal_id):
 
 
 @bp.post("/<goal_id>/tasks")
-def add_tasks_tp_goal(goal_id):
+def add_tasks_to_goal(goal_id):
     goal = validate_model(Goal, goal_id)
     request_body = request.get_json()
     task_ids = request_body["task_ids"]
 
-    for task_id in task_ids:
-        task = validate_model(Task, task_id)
-        goal.tasks.append(task)
+    tasks = [validate_model(Task, task_id) for task_id in task_ids]
+    goal.tasks = tasks
 
     db.session.commit()
 
     response = {
         "id": goal.id,
-        "task_ids": task_ids,
+        "task_ids": [task.id for task in goal.tasks],
     }
     return response

@@ -7,8 +7,8 @@ import requests
 import os
 
 
-SLACK_API_URL = os.environ["SLACK_API_URL"]
-SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
+SLACK_API_URL = os.environ.get("SLACK_API_URL")
+SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
 
 bp = Blueprint("tasks_bp", __name__, url_prefix="/tasks")
 
