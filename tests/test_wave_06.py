@@ -27,7 +27,7 @@ def test_post_task_ids_to_goal(client, one_goal, three_tasks):
 def test_post_task_ids_to_goal_already_with_goals(client, one_task_belongs_to_one_goal, three_tasks):
     # Act
     response = client.post("/goals/1/tasks", json={
-        "task_ids": [1, 4]
+        "task_ids": [2, 4]
     })
     response_body = response.get_json()
 
@@ -37,7 +37,7 @@ def test_post_task_ids_to_goal_already_with_goals(client, one_task_belongs_to_on
     assert "task_ids" in response_body
     assert response_body == {
         "id": 1,
-        "task_ids": [1, 4]
+        "task_ids": [2, 4]
     }
     assert len(Goal.query.get(1).tasks) == 2
 
